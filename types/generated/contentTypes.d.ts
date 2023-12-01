@@ -677,63 +677,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiCaseCase extends Schema.CollectionType {
-  collectionName: 'cases';
-  info: {
-    singularName: 'case';
-    pluralName: 'cases';
-    displayName: 'Case';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    desc: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    image: Attribute.Media &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    imgURL: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::case.case', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::case.case', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::case.case',
-      'oneToMany',
-      'api::case.case'
-    >;
-    locale: Attribute.String;
-  };
-}
-
 export interface ApiCustomerCustomer extends Schema.CollectionType {
   collectionName: 'customers';
   info: {
@@ -759,6 +702,36 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHealthCheckHealthCheck extends Schema.SingleType {
+  collectionName: 'health';
+  info: {
+    singularName: 'health-check';
+    pluralName: 'health';
+    displayName: 'Health';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    status: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::health-check.health-check',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::health-check.health-check',
       'oneToOne',
       'admin::user'
     > &
@@ -885,70 +858,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
 }
 
-export interface ApiSectionHeroSectionHero extends Schema.SingleType {
-  collectionName: 'section_heroes';
-  info: {
-    singularName: 'section-hero';
-    pluralName: 'section-heroes';
-    displayName: 'SectionHero';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    desc: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    promoURL: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    promo: Attribute.Media &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::section-hero.section-hero',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::section-hero.section-hero',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::section-hero.section-hero',
-      'oneToMany',
-      'api::section-hero.section-hero'
-    >;
-    locale: Attribute.String;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -965,10 +874,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::case.case': ApiCaseCase;
       'api::customer.customer': ApiCustomerCustomer;
+      'api::health-check.health-check': ApiHealthCheckHealthCheck;
       'api::product.product': ApiProductProduct;
-      'api::section-hero.section-hero': ApiSectionHeroSectionHero;
     }
   }
 }

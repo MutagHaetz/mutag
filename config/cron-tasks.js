@@ -5,7 +5,7 @@ module.exports = {
   myJob: {
     task: async ({ strapi }) => {
       try {
-        const response = await axios.get(STRAPI_URL + "/api/cases");
+        const response = await axios.get(STRAPI_URL + "/api/health-check");
         if (response) console.log("🐇 Wake up, Neo...");
       } catch (error) {
         console.error("❌ Waking up Error!", error);
