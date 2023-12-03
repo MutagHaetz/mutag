@@ -923,6 +923,7 @@ export interface ApiReviewReview extends Schema.CollectionType {
     singularName: 'review';
     pluralName: 'reviews';
     displayName: 'Review';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -952,6 +953,12 @@ export interface ApiReviewReview extends Schema.CollectionType {
         };
       }>;
     mediaUrl: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    uid: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
