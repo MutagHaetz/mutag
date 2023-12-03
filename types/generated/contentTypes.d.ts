@@ -934,12 +934,6 @@ export interface ApiReviewReview extends Schema.CollectionType {
     };
   };
   attributes: {
-    title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     desc: Attribute.Text &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -962,6 +956,12 @@ export interface ApiReviewReview extends Schema.CollectionType {
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
+        };
+      }>;
+    customerName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
         };
       }>;
     createdAt: Attribute.DateTime;
