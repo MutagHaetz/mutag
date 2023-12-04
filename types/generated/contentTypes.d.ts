@@ -712,6 +712,24 @@ export interface ApiContactContact extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    insta: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    fb: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    watsapp: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -959,6 +977,12 @@ export interface ApiReviewReview extends Schema.CollectionType {
         };
       }>;
     customerName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    customerPosition: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
