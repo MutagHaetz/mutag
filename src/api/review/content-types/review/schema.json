@@ -24,7 +24,7 @@
       },
       "type": "text"
     },
-    "media": {
+    "img": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -38,7 +38,7 @@
         }
       }
     },
-    "mediaUrl": {
+    "imgUrl": {
       "pluginOptions": {
         "i18n": {
           "localized": false
@@ -66,6 +66,26 @@
       "pluginOptions": {
         "i18n": {
           "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "video": {
+      "allowedTypes": [
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "videoUrl": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
         }
       },
       "type": "string"

@@ -730,6 +730,12 @@ export interface ApiContactContact extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    addressUrl: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -958,13 +964,13 @@ export interface ApiReviewReview extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    media: Attribute.Media &
+    img: Attribute.Media &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
         };
       }>;
-    mediaUrl: Attribute.String &
+    imgUrl: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -986,6 +992,18 @@ export interface ApiReviewReview extends Schema.CollectionType {
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
+        };
+      }>;
+    video: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    videoUrl: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
         };
       }>;
     createdAt: Attribute.DateTime;
