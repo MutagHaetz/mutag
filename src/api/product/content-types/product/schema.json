@@ -115,7 +115,8 @@
           "localized": false
         }
       },
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "button": {
       "pluginOptions": {
@@ -123,7 +124,8 @@
           "localized": true
         }
       },
-      "type": "string"
+      "type": "string",
+      "default": "View"
     }
   }
 }
