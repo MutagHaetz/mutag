@@ -822,50 +822,6 @@ export interface ApiHealthCheckHealthCheck extends Schema.SingleType {
   };
 }
 
-export interface ApiHeroHero extends Schema.SingleType {
-  collectionName: 'heroes';
-  info: {
-    singularName: 'hero';
-    pluralName: 'heroes';
-    displayName: 'Hero';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    desc: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::hero.hero', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::hero.hero', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::hero.hero',
-      'oneToMany',
-      'api::hero.hero'
-    >;
-    locale: Attribute.String;
-  };
-}
-
 export interface ApiMemberMember extends Schema.CollectionType {
   collectionName: 'members';
   info: {
@@ -1166,7 +1122,6 @@ declare module '@strapi/types' {
       'api::contact.contact': ApiContactContact;
       'api::customer.customer': ApiCustomerCustomer;
       'api::health-check.health-check': ApiHealthCheckHealthCheck;
-      'api::hero.hero': ApiHeroHero;
       'api::member.member': ApiMemberMember;
       'api::product.product': ApiProductProduct;
       'api::review.review': ApiReviewReview;
