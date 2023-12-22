@@ -126,6 +126,14 @@
       },
       "type": "string",
       "default": "View"
+    },
+    "price": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
