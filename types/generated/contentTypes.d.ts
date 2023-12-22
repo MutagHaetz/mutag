@@ -1009,6 +1009,12 @@ export interface ApiPostPost extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    preview: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
