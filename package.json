@@ -19,8 +19,9 @@
     "@strapi/plugin-users-permissions": "4.15.0",
     "@strapi/provider-upload-cloudinary": "^4.15.0",
     "@strapi/strapi": "4.15.0",
+    "axios": "^1.6.2",
     "pg": "8.8.0",
-    "axios": "^1.6.2"
+    "strapi-plugin-populate-deep": "^3.0.1"
   },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
