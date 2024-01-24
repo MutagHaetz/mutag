@@ -631,7 +631,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -659,6 +658,21 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    bag: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::good.good'
+    >;
+    favorites: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::good.good'
+    >;
+    orders: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::order.order'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -805,6 +819,58 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
   };
 }
 
+export interface ApiGoodGood extends Schema.CollectionType {
+  collectionName: 'goods';
+  info: {
+    singularName: 'good';
+    pluralName: 'goods';
+    displayName: 'Good';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    img: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    uid: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::good.good', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::good.good', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::good.good',
+      'oneToMany',
+      'api::good.good'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiHealthCheckHealthCheck extends Schema.SingleType {
   collectionName: 'health';
   info: {
@@ -944,6 +1010,62 @@ export interface ApiMemberMember extends Schema.CollectionType {
       'api::member.member',
       'oneToMany',
       'api::member.member'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'Order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::order.order',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    goods: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::good.good'
+    >;
+    price: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::order.order'
     >;
     locale: Attribute.String;
   };
@@ -1266,9 +1388,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::contact.contact': ApiContactContact;
       'api::customer.customer': ApiCustomerCustomer;
+      'api::good.good': ApiGoodGood;
       'api::health-check.health-check': ApiHealthCheckHealthCheck;
       'api::hero.hero': ApiHeroHero;
       'api::member.member': ApiMemberMember;
+      'api::order.order': ApiOrderOrder;
       'api::post.post': ApiPostPost;
       'api::product.product': ApiProductProduct;
       'api::review.review': ApiReviewReview;
