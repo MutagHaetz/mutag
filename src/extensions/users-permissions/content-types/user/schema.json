@@ -64,22 +64,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "bag": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::good.good"
-    },
-    "favorites": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::good.good"
-    },
-    "orders": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::order.order",
-      "mappedBy": "user"
     }
   }
 }

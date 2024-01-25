@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "orders",
+  "collectionName": "bags",
   "info": {
-    "singularName": "order",
-    "pluralName": "orders",
-    "displayName": "Order",
+    "singularName": "bag",
+    "pluralName": "bags",
+    "displayName": "Bag",
     "description": ""
   },
   "options": {
@@ -12,27 +12,18 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "orderPrice": {
-      "type": "integer"
-    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
-    },
+			    },
     "goods": {
       "type": "component",
       "repeatable": true,
       "component": "order-goods.order-good"
     },
-    "orderNum": {
-      "type": "biginteger",
-      "unique": true
-    },
-    "city": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::city.city"
+    "bagPrice": {
+      "type": "integer"
     }
   }
 }

@@ -659,21 +659,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    bag: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::good.good'
-    >;
-    favorites: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::good.good'
-    >;
-    orders: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::order.order'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -688,6 +673,79 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface ApiBagBag extends Schema.CollectionType {
+  collectionName: 'bags';
+  info: {
+    singularName: 'bag';
+    pluralName: 'bags';
+    displayName: 'Bag';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::bag.bag',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Attribute.Unique;
+    goods: Attribute.Component<'order-goods.order-good', true>;
+    bagPrice: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::bag.bag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::bag.bag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCityCity extends Schema.CollectionType {
+  collectionName: 'cities';
+  info: {
+    singularName: 'city';
+    pluralName: 'cities';
+    displayName: 'City';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    cityName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    zone: Attribute.Relation<
+      'api::city.city',
+      'manyToOne',
+      'api::location.location'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::city.city', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::city.city', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::city.city',
+      'oneToMany',
+      'api::city.city'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -812,6 +870,45 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFavoriteFavorite extends Schema.CollectionType {
+  collectionName: 'favorites';
+  info: {
+    singularName: 'favorite';
+    pluralName: 'favorites';
+    displayName: 'Favorite';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::favorite.favorite',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    goods: Attribute.Relation<
+      'api::favorite.favorite',
+      'oneToMany',
+      'api::good.good'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::favorite.favorite',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::favorite.favorite',
       'oneToOne',
       'admin::user'
     > &
@@ -945,6 +1042,64 @@ export interface ApiHeroHero extends Schema.SingleType {
   };
 }
 
+export interface ApiLocationLocation extends Schema.CollectionType {
+  collectionName: 'locations';
+  info: {
+    singularName: 'location';
+    pluralName: 'locations';
+    displayName: 'Location';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    zone: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    price: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    cities: Attribute.Relation<
+      'api::location.location',
+      'oneToMany',
+      'api::city.city'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::location.location',
+      'oneToMany',
+      'api::location.location'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiMemberMember extends Schema.CollectionType {
   collectionName: 'members';
   info: {
@@ -1021,32 +1176,21 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     singularName: 'order';
     pluralName: 'orders';
     displayName: 'Order';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
+    orderPrice: Attribute.Integer;
     user: Attribute.Relation<
       'api::order.order',
-      'manyToOne',
+      'oneToOne',
       'plugin::users-permissions.user'
     >;
-    goods: Attribute.Relation<
-      'api::order.order',
-      'oneToMany',
-      'api::good.good'
-    >;
-    price: Attribute.Integer &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
+    goods: Attribute.Component<'order-goods.order-good', true>;
+    orderNum: Attribute.BigInteger & Attribute.Unique;
+    city: Attribute.Relation<'api::order.order', 'oneToOne', 'api::city.city'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1062,12 +1206,6 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::order.order',
-      'oneToMany',
-      'api::order.order'
-    >;
-    locale: Attribute.String;
   };
 }
 
@@ -1386,11 +1524,15 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::bag.bag': ApiBagBag;
+      'api::city.city': ApiCityCity;
       'api::contact.contact': ApiContactContact;
       'api::customer.customer': ApiCustomerCustomer;
+      'api::favorite.favorite': ApiFavoriteFavorite;
       'api::good.good': ApiGoodGood;
       'api::health-check.health-check': ApiHealthCheckHealthCheck;
       'api::hero.hero': ApiHeroHero;
+      'api::location.location': ApiLocationLocation;
       'api::member.member': ApiMemberMember;
       'api::order.order': ApiOrderOrder;
       'api::post.post': ApiPostPost;

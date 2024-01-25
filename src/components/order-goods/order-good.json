@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_order_goods_order_goods",
+  "info": {
+    "displayName": "OrderGood",
+    "icon": "archive"
+  },
+  "options": {},
+  "attributes": {
+    "good": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::good.good"
+    },
+    "count": {
+      "type": "integer"
+    }
+  }
+}
