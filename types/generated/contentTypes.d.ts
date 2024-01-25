@@ -692,8 +692,7 @@ export interface ApiBagBag extends Schema.CollectionType {
       'api::bag.bag',
       'oneToOne',
       'plugin::users-permissions.user'
-    > &
-      Attribute.Unique;
+    >;
     goods: Attribute.Component<'order-goods.order-good', true>;
     bagPrice: Attribute.Integer;
     createdAt: Attribute.DateTime;
