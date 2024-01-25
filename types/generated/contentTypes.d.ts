@@ -921,6 +921,7 @@ export interface ApiGoodGood extends Schema.CollectionType {
     singularName: 'good';
     pluralName: 'goods';
     displayName: 'Good';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -946,6 +947,54 @@ export interface ApiGoodGood extends Schema.CollectionType {
       }>;
     title: Attribute.String &
       Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    descShort: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    descLong: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    length: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    width: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    thickness: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    wood: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    manufacturer: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
