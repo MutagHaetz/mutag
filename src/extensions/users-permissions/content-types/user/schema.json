@@ -64,6 +64,15 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "lastName": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "phone": {
+      "type": "string",
+      "regex": "/^([+]?[\\s0-9]+)?(\\d{3}|[(]?[0-9]+[)])?([-]?[\\s]?[0-9])+$/"
     }
   }
 }
