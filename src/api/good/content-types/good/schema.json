@@ -111,17 +111,17 @@
       },
       "type": "string"
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category",
-      "mappedBy": "good"
-    },
     "sub_categories": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::sub-category.sub-category",
-      "mappedBy": "good"
+      "mappedBy": "goods"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "goods"
     }
   }
 }
