@@ -40,9 +40,9 @@
       "target": "api::category.category",
       "inversedBy": "sub_categories"
     },
-    "good": {
+    "goods": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::good.good",
       "inversedBy": "sub_categories"
     }

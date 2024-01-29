@@ -665,6 +665,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
         minLength: 1;
       }>;
     phone: Attribute.String;
+    firstName: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -717,6 +718,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -741,9 +743,9 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
           localized: false;
         };
       }>;
-    good: Attribute.Relation<
+    goods: Attribute.Relation<
       'api::category.category',
-      'manyToOne',
+      'manyToMany',
       'api::good.good'
     >;
     sub_categories: Attribute.Relation<
@@ -1070,15 +1072,15 @@ export interface ApiGoodGood extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    categories: Attribute.Relation<
-      'api::good.good',
-      'oneToMany',
-      'api::category.category'
-    >;
     sub_categories: Attribute.Relation<
       'api::good.good',
-      'oneToMany',
+      'manyToMany',
       'api::sub-category.sub-category'
+    >;
+    categories: Attribute.Relation<
+      'api::good.good',
+      'manyToMany',
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1672,9 +1674,9 @@ export interface ApiSubCategorySubCategory extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
-    good: Attribute.Relation<
+    goods: Attribute.Relation<
       'api::sub-category.sub-category',
-      'manyToOne',
+      'manyToMany',
       'api::good.good'
     >;
     createdAt: Attribute.DateTime;
