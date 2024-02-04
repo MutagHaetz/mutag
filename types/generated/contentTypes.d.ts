@@ -1082,6 +1082,26 @@ export interface ApiGoodGood extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    price: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    unit: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    weight: Attribute.Float &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1703,6 +1723,46 @@ export interface ApiSubCategorySubCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserAddressUserAddress extends Schema.CollectionType {
+  collectionName: 'user_addresses';
+  info: {
+    singularName: 'user-address';
+    pluralName: 'user-addresses';
+    displayName: 'UserAddress';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    city: Attribute.String & Attribute.Required;
+    street: Attribute.String;
+    index: Attribute.String;
+    region: Attribute.String;
+    app: Attribute.String;
+    user: Attribute.Relation<
+      'api::user-address.user-address',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-address.user-address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-address.user-address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1735,6 +1795,7 @@ declare module '@strapi/types' {
       'api::product.product': ApiProductProduct;
       'api::review.review': ApiReviewReview;
       'api::sub-category.sub-category': ApiSubCategorySubCategory;
+      'api::user-address.user-address': ApiUserAddressUserAddress;
     }
   }
 }
