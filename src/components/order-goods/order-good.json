@@ -2,7 +2,8 @@
   "collectionName": "components_order_goods_order_goods",
   "info": {
     "displayName": "OrderGood",
-    "icon": "archive"
+    "icon": "archive",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,6 +14,15 @@
     },
     "count": {
       "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "descShort": {
+      "type": "string"
+    },
+    "imgUrl": {
+      "type": "string"
     }
   }
 }

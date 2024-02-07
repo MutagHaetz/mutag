@@ -5,6 +5,7 @@ export interface OrderGoodsOrderGood extends Schema.Component {
   info: {
     displayName: 'OrderGood';
     icon: 'archive';
+    description: '';
   };
   attributes: {
     good: Attribute.Relation<
@@ -13,6 +14,9 @@ export interface OrderGoodsOrderGood extends Schema.Component {
       'api::good.good'
     >;
     count: Attribute.Integer;
+    title: Attribute.String;
+    descShort: Attribute.String;
+    imgUrl: Attribute.String;
   };
 }
 
