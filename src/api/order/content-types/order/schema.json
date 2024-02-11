@@ -33,6 +33,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::city.city"
+    },
+    "user_address": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-address.user-address"
     }
   }
 }
