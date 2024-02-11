@@ -1341,6 +1341,11 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     goods: Attribute.Component<'order-goods.order-good', true>;
     orderNum: Attribute.BigInteger & Attribute.Unique;
     city: Attribute.Relation<'api::order.order', 'oneToOne', 'api::city.city'>;
+    user_address: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'api::user-address.user-address'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
